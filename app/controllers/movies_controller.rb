@@ -1,14 +1,12 @@
 class MoviesController < ApplicationController
 
   def show
-    id = params[:id] # retrieve movie ID from URI route
-    @movie = Movie.find(id) # look up movie by unique ID
-    # will render app/views/movies/show.<extension> by default
+    id = params[:id] 
+    @movie = Movie.find(id)
   end
 
   def index
-    #Part 1,2,3 starts here:
-    if request.path == '/' #For a default path
+    if request.path == '/' 
       reset_session
     end
     
@@ -22,7 +20,7 @@ class MoviesController < ApplicationController
       @sort = params[:sort] 
     end
     
-    session[:sort_by] = @sort  # Added for session record
+    session[:sort_by] = @sort 
     
     if !params[:ratings].nil?
       @ratings_to_show = params[:ratings].keys
@@ -33,16 +31,15 @@ class MoviesController < ApplicationController
     @all_ratings = Movie.all_ratings
    
     
-    #Added for part 2
     #@sort = params[:sort] //Moved up for Part 3 Session data
 
     if @sort
       @movies = @movies.order(@sort)
         case @sort
         when "title"
-          @title_header = 'bg-warning'    #bootstrap class
+          @title_header = 'bg-warning'
         when !"title"
-          @title_header = 'hilite'        #css class
+          @title_header = 'hilite'
         when "release_date"
           @release_date_header = 'bg-warning'
         when !"release_date"

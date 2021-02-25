@@ -12,7 +12,7 @@ class MoviesController < ApplicationController
     
     @ratings_to_show =!session[:ratings_to_show].nil? ? session[:ratings_to_show]:[]
     if !session[:sort_by].nil?
-      if !params[:sort].nil? and params[:sort] != session[:sort_by] #What if the sort value is changed?
+      if !params[:sort].nil? and params[:sort] != session[:sort_by] 
         session[:sort_by] = params[:sort]
       end
       @sort = session[:sort_by]
